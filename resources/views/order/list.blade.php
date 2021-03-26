@@ -16,22 +16,22 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($invoices as $invoice)
+                @foreach($orders as $order)
                 <tr>
-                    <td>{{ $invoice->id }}</td>
-                    <td>{{ $invoice->created_at }}</td>
-                    <td>{{ $invoice->total }}</td>
-                    <td>{{ $invoice->expiredDate }}</td>
-                    <td>{{ $invoice->status }}</td>
+                    <td>{{ $order->id }}</td>
+                    <td>{{ $order->created_at }}</td>
+                    <td>{{ $order->total }}</td>
+                    <td>{{ $order->expiredDate }}</td>
+                    <td>{{ $order->status }}</td>
                     <td>
-                        <a href="{{ route('ui_invoice_detail',$invoice->id) }}" class='btn btn-sm btn-info'>Xem</a>
+                        <a href="{{ route('ui_order_detail',$order->id) }}" class='btn btn-sm btn-info'>Xem</a>
                         <a href="" class='btn btn-sm btn-success'>Thanh toán</a>
                     </td>
 
                 </tr>
                 @endforeach
             </tbody>
-            {{ $invoices->links() }}
+            {{ $orders->links() }}
         </table>
         
     </div>

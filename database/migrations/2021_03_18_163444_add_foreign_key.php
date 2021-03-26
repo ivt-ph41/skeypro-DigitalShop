@@ -23,11 +23,11 @@ class AddForeignKey extends Migration
             $table->foreign('user_id')->references('id')->on('users');
         });
         Schema::table('blog_categories',function (Blueprint $table){
-            $table->foreign('cover_id')->references('id')->on('files');
+            $table->foreign('imageCover_id')->references('id')->on('files');
         });
         Schema::table('blog_posts',function (Blueprint $table){
             $table->foreign('blogCategory_id')->references('id')->on('blog_categories');
-            $table->foreign('cover_id')->references('id')->on('files');
+            $table->foreign('imageCover_id')->references('id')->on('files');
             $table->foreign('writer_id')->references('id')->on('users');
         });
         Schema::table('blog_comments',function (Blueprint $table){
@@ -42,9 +42,6 @@ class AddForeignKey extends Migration
         Schema::table('deliver_details',function (Blueprint $table){
             $table->foreign('deliverCompany_id')->references('id')->on('deliver_companies');
         });
-        Schema::table('notifies',function (Blueprint $table){
-            $table->foreign('toUser_id')->references('id')->on('users');
-        });
         Schema::table('payment_details',function (Blueprint $table){
             $table->foreign('payment_id')->references('id')->on('payment_methods');
         });
@@ -57,9 +54,9 @@ class AddForeignKey extends Migration
             $table->foreign('voucher_id')->references('id')->on('vouchers');
         });
         Schema::table('report_logs',function (Blueprint $table){
-            $table->foreign('userReport_id')->references('id')->on('user_reports');
+            $table->foreign('report_id')->references('id')->on('reports');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('file_id')->references('id')->on('files');
+            $table->foreign('attachFile_id')->references('id')->on('files');
         });
         Schema::table('role_permissions',function (Blueprint $table){
             $table->foreign('role_id')->references('id')->on('roles');
@@ -73,54 +70,57 @@ class AddForeignKey extends Migration
             $table->foreign('user_id')->references('id')->on('users');
 
         });
-        Schema::table('user_rates',function (Blueprint $table){
-            $table->foreign('invoice_id')->references('id')->on('invoices');
+        Schema::table('ratings',function (Blueprint $table){
+            $table->foreign('order_id')->references('id')->on('orders');
             $table->foreign('buyer_id')->references('id')->on('users');
             $table->foreign('image_id')->references('id')->on('files');
         });
         
         Schema::table('users',function (Blueprint $table){
-            $table->foreign('avatar_id')->references('id')->on('files');
-            $table->foreign('cover_id')->references('id')->on('files');
+            $table->foreign('imageAvatar_id')->references('id')->on('files');
+            $table->foreign('imageCover_id')->references('id')->on('files');
         });
         Schema::table('user_roles', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('role_id')->references('id')->on('roles');
         });
         Schema::table('categories', function (Blueprint $table) {
-            $table->foreign('image_id')->references('id')->on('files');
+            $table->foreign('imageCover_id')->references('id')->on('files');
         });
         Schema::table('products', function (Blueprint $table) {
             $table->foreign('imageCover_id')->references('id')->on('files');
             $table->foreign('category_id')->references('id')->on('categories');
-            
         });
         Schema::table('product_images',function (Blueprint $table){
             $table->foreign('product_id')->references('id')->on('products');
-            $table->foreign('file_id')->references('id')->on('files');
+            $table->foreign('image_id')->references('id')->on('files');
         });
         Schema::table('items', function (Blueprint $table) {
-            $table->foreign('invoice_id')->references('id')->on('invoices');
+            $table->foreign('order_id')->references('id')->on('orders');
             $table->foreign('product_id')->references('id')->on('products');
         });
-        Schema::table('invoices', function (Blueprint $table) {
+        Schema::table('orders', function (Blueprint $table) {
             $table->foreign('buyer_id')->references('id')->on('users');
         });
         Schema::table('user_profiles', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users');
         });
-        Schema::table('product_invoices', function (Blueprint $table) {
+        Schema::table('product_orders', function (Blueprint $table) {
             $table->foreign('product_id')->references('id')->on('products');
-            $table->foreign('invoice_id')->references('id')->on('invoices');
+            $table->foreign('order_id')->references('id')->on('orders');
             $table->foreign('voucher_id')->references('id')->on('vouchers');
         });
-        Schema::table('user_reports',function (Blueprint $table){
-            $table->foreign('invoice_id')->references('id')->on('invoices');
+        Schema::table('reports',function (Blueprint $table){
+            $table->foreign('order_id')->references('id')->on('orders');
             $table->foreign('buyer_id')->references('id')->on('users');
         });
 
         Schema::table('vouchers',function (Blueprint $table){
             $table->foreign('creator_id')->references('id')->on('users');
+        });
+        
+        Schema::table('deliver_details',function (Blueprint $table){
+            $table->foreign('order_id')->references('id')->on('orders');
         });
 
     }

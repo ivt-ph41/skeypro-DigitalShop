@@ -6,7 +6,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3>Hoá đơn và giao hàng
-                            @switch($invoice->status)
+                            @switch($order->status)
                                 @case('paid')
                                 <span style='float:right' class='badge badge-success'>Hoàn thành</span>
                                 @break
@@ -23,7 +23,7 @@
                         </h3>
                     </div>
                     <div class="card-body">
-                        <h4>Thông tin hoá đơn số #{{ $invoice->id }}</h4>
+                        <h4>Thông tin hoá đơn số #{{ $order->id }}</h4>
                         <div class="card">
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -37,28 +37,28 @@
                                         <tbody>
                                             <tr>
                                                 <td style='font-weight=700'>Người tạo</td>
-                                                <td>{{ $invoice->creator }}</td>
+                                                <td>{{ $order->creator }}</td>
                                             </tr>
                                             <tr>
                                                 <td style='font-weight=700'>Khách ghi chú</td>
-                                                <td>{!! $invoice->buyer_note !!}</td>
+                                                <td>{!! $order->buyer_note !!}</td>
                                             </tr>
                                             <tr>
                                                 <td style='font-weight=700'>Admin ghi chú</td>
-                                                <td>{!! $invoice->admin_note !!}</td>
+                                                <td>{!! $order->admin_note !!}</td>
                                             </tr>
                                             <tr>
                                                 <td style='font-weight=700'>Thời gian</td>
-                                                <td>{!! $invoice->created_at !!}</td>
+                                                <td>{!! $order->created_at !!}</td>
                                             </tr>
                                             <tr>
                                                 <td style='font-weight=700'>Thời gian thanh toán</td>
-                                                <td>{!! $invoice->paidDate !!}</td>
+                                                <td>{!! $order->paidDate !!}</td>
                                             </tr>
                                             <tr>
                                                 <td style='font-weight=700'>Sản phẩm</td>
                                                 <td>
-                                                    @foreach ($invoice->products as $product)
+                                                    @foreach ($order->products as $product)
                                                         - {{ $product->name }} / số lượng: {{ $product->pivot->amount }}
                                                         / đơn giá: {{ $product->pivot->unitPrice }} <br>
                                                     @endforeach
@@ -66,7 +66,7 @@
                                             </tr>
                                             <tr>
                                                 <td style='font-weight=700'>Tổng hoá đơn</td>
-                                                <td>{{ number_format($invoice->total, 0, ',', '.') . ' vnd' }}</td>
+                                                <td>{{ number_format($order->total, 0, ',', '.') . ' vnd' }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -77,7 +77,7 @@
                         <h4>Sản phẩm</h4>
                         <div class="card">
                             <div class="card-body" style='background: #d8d8d89e;font-weight: 700;'>
-                                @foreach ($invoice->items() as $item)
+                                @foreach ($order->items() as $item)
                                     <p>{{ $item->item }}</p>
                                 @endforeach
                             </div>

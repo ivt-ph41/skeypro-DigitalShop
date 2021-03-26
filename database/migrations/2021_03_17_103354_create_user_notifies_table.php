@@ -12,7 +12,7 @@ class CreateUserNotifiesTable extends Migration
      * @return void
      */
     public function up()
-    {
+    { 
         Schema::create('user_notifies', function (Blueprint $table) {
             $table->unsignedBigInteger('notify_id');
             $table->unsignedBigInteger('user_id');

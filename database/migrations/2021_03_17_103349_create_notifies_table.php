@@ -15,7 +15,6 @@ class CreateNotifiesTable extends Migration
     {
         Schema::create('notifies', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('toUser_id')->nullable();
             $table->string('content')->nullable();
             $table->timestamps();
         });

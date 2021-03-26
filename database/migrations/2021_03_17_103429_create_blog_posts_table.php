@@ -17,7 +17,7 @@ class CreateBlogPostsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('blogCategory_id')->nullable();
             $table->unsignedBigInteger('writer_id');
-            $table->unsignedBigInteger('cover_id')->nullable();
+            $table->unsignedBigInteger('imageCover_id')->nullable();
             $table->text('short_description')->nullable();
             $table->longText('content');
             $table->boolean('doComment')->default(TRUE);

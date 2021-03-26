@@ -16,7 +16,8 @@ class CreateDeliverDetailsTable extends Migration
         Schema::create('deliver_details', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('deliverCompany_id');
-            $table->string('transaction')->nullable();
+            $table->string('transaction')->nullable(); // receive data from deliver Company API
+            $table->unsignedBigInteger('order_id'); // link with Order
             $table->datetime('deliverTime');
             $table->timestamps();
         });

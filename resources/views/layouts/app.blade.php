@@ -31,7 +31,7 @@
                     <a class="nav-link" href="#">Sản phẩm</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ route('ui_invoices') }}">Quản lí đơn hàng</a>
+                    <a class="nav-link" href="{{ route('ui_orders') }}">Quản lí đơn hàng</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Lịch sử nạp tiền</a>

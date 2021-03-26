@@ -15,7 +15,7 @@ class CreateProductImagesTable extends Migration
     {
         Schema::create('product_images', function (Blueprint $table) {
             $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('file_id');
+            $table->unsignedBigInteger('image_id');
             $table->string('status')->default('active');
             $table->timestamps();
         });

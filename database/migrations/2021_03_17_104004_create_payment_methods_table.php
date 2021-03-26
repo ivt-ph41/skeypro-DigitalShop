@@ -16,10 +16,10 @@ class CreatePaymentMethodsTable extends Migration
         Schema::create('payment_methods', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('shortDescription')->nullable();
-            $table->string('tutorial')->nullable();
-            $table->float('fee')->nullable();
-            $table->string('status')->default('active');
+            $table->string('shortDescription')->nullable(); // mô tả ngắn về phương thức thanh toán
+            $table->string('tutorial')->nullable(); // hướng dẫn thanh toán
+            $table->float('fee')->nullable(); // phí giao dịch cho phương thức thanh toán
+            $table->string('status')->default('active'); 
             $table->timestamps();
         });
     }

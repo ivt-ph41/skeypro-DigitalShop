@@ -16,9 +16,11 @@ class CreateBalanceHistoriesTable extends Migration
         Schema::create('balance_histories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->string('content');
-            $table->double('value');
-            $table->string('type');
+            $table->string('content'); // nội dung
+            $table->double('value'); // thay đổi
+            $table->double('prevBalance')->nullable();
+            $table->double('lastBalance')->nullable();
+            $table->string('type'); // type: minus or plus 
             $table->timestamps();
         });
     }

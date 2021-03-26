@@ -12,7 +12,7 @@ class CreateActivityHistoriesTable extends Migration
      * @return void
      */
     public function up()
-    {
+    { // Lịch sử hoạt động
         Schema::create('activity_histories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');

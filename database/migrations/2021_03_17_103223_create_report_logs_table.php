@@ -15,10 +15,10 @@ class CreateReportLogsTable extends Migration
     {
         Schema::create('report_logs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('userReport_id'); // thuộc về vấn đề nào
+            $table->unsignedBigInteger('report_id'); // thuộc về vấn đề nào
             $table->unsignedBigInteger('user_id'); // người hội thoại
             $table->text('content')->nullable(); // nội dung văn bản
-            $table->unsignedBigInteger('file_id'); // nội dung file
+            $table->unsignedBigInteger('attachFile_id'); // nội dung file
             $table->timestamps();
         });
     }
