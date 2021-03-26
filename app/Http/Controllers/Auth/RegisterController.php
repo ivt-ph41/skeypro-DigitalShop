@@ -48,11 +48,24 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        $messages = [
+            'username.required' => 'Tên đăng nhập không được để trống',
+            'username.unique' => 'Tên đăng nhập đã tồn tại vui lòng chọn tên khác',
+            'username.max' => 'Tên đăng nhập quá dài',
+            'username.regex' => 'Tên đăng nhập không đúng định dạng',
+            'password.required' => 'Mật khẩu không được để trống',
+            'password.min' => 'Mật khẩu quá yếu, vui lòng tạo dài hơn 8 kí tự',
+            'password.confirmed' => 'Nhập lại mật khẩu không đúng',
+            'email.required' => 'Email không được để trống',
+            'email.email' => 'Không đúng định dạng email',
+            'email.unique' => 'Địa chỉ email này đã được sử dụng',
+        ];
         return Validator::make($data, [
-            'username' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'username' => ['required','string','max:255','unique:users','regex:/(^([a-zA-Z]+)(\d+)?$)/u'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+            'email' => ['required','email','unique:users'],
+        ],$messages);
     }
 
     /**
