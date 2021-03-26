@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -25,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/trang-chu';
 
     /**
      * Create a new controller instance.
@@ -35,5 +36,27 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function login(Request $request)
+    {
+       $request->validate([
+           'username' => 'required|string|max:255|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
+           'password' => 'required|string|min:8',
+       ],
+       [
+        'required' => 'Vui lòng nhập đầy đủ thông tin đăng nhập',
+        'username.regex' => 'Tên đăng nhập hoặc mật khẩu sai',
+        'password.string' => 'Tên đăng nhập hoặc mật khẩu sai',
+        'password.min' => 'Tên đăng nhập hoặc mật khẩu sai',
+       ]);
+        $username = trim($request->get('username'));
+        $password = trim($request->get('password'));
+       if(Auth::attempt(['username' => $username, 'password' => $password])){
+           session()->flash('message','Đăng nhập thành công, chào mừng quay lại');
+        return redirect('trang-chu');   
+       }else{
+        return redirect()->back()->withErrors('Tên đăng nhập hoặc mật khẩu sai');   
+       }
     }
 }
