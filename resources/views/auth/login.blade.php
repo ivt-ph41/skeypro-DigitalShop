@@ -1,73 +1,137 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('ĐĂNG NHẬP') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Tên đăng nhập') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="username" type="username" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
-
-                                @error('username')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+    <div class="page-content section">
+        <!-- Start breadcume area -->
+        <div class="breadcume-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="breadcrumb">
+                            <a title="Return to Home" href="index.html" class="home"><i class="fa fa-home"></i></a>
+                            <span class="navigation-pipe">&gt;</span>
+                            ĐĂNG NHẬP
                         </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Mật khẩu') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Ghi nhớ') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('ĐĂNG NHẬP') }}
-                                </button>
-
-                                @if (Route::has('password.getInfo'))
-                                    <a class="btn btn-link" href="{{ route('password.getInfo') }}">
-                                        {{ __('Quên mật khẩu?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
+        <!-- End breadcume area -->
+        <!-- LOGIN-AREA START -->
+        <div class="lognin-area">
+            <div class="container">
+                <div class="row">
+                    <!-- Registered-Customers Start -->
+                    <div class="col-lg-6">
+                        <form action="{{ route('login') }}" method='POST' id='form_login'>
+                            @csrf
+                            <div class="registered-customers">
+                                <h3>ĐĂNG NHẬP</h3>
+                                <div class="registered">
+                                    <p>Nếu bạn đã có tài khoản, vui lòng đăng nhập.</p>
+                                    @if ($errors->has('login_password'))
+                                        <p style='color:red'>{{ $errors->first('login_password') }}</p>
+                                    @endif
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <input type="text" class="custom-form" name="login_username"
+                                                placeholder="Tên đăng nhập" value='{{ old('login_username') }}' />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <input type="password" name='login_password' class="custom-form"
+                                                placeholder="Mật khẩu" />
+                                        </div>
+                                    </div>
+                                    <p><label class="forgot"><a href="{{ route('password.getInfo') }}">Quên mật
+                                                khẩu?</a></label></p>
+                                    <button class="btn btnContact" id='btn_login' type="submit">ĐĂNG NHẬP</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Registered-Customers End -->
+                    <div class="col-lg-6">
+                        <form action="{{ route('register') }}" method='POST' id='form_register'>
+                            @csrf
+                            <div class="new-customers">
+                                <h3>KHÁCH HÀNG MỚI</h3>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="text" name='username' class="custom-form" placeholder="Tên đăng nhập"
+                                            value='{{ old('username') }}' />
+                                        @if ($errors->has('username'))
+                                            <p style='color:red'>{{ $errors->first('username') }}</p>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="email" name='email' class="custom-form" placeholder="Địa chỉ email"
+                                            value='{{ old('email') }}' />
+                                        @if ($errors->has('email'))
+                                            <p style='color:red'>{{ $errors->first('email') }}</p>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="password" name='password' class="custom-form" placeholder="Mật khẩu" />
+                                        @if ($errors->has('password'))
+                                            <p style='color:red'>{{ $errors->first('password') }}</p>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="password" name='password_confirmation' class="custom-form"
+                                            placeholder="Nhập lại mật khẩu" />
+                                        @if ($errors->has('password_confirmation'))
+                                            <p style='color:red'>{{ $errors->first('password_confirmation') }}</p>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="terms_agreement" value='1' />
+                                        Bằng cách đăng kí tài khoản bạn sẽ hoàn toàn đồng ý với <a href="">ĐIỀU KHOẢN DỊCH
+                                            VỤ</a> của chúng tôi.
+                                    </label>
+                                    @if ($errors->has('terms_agreement'))
+                                        <p style='color:red'>{{ $errors->first('terms_agreement') }}</p>
+                                    @endif
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <!-- <input type="submit" class="custom-form custom-submit no-margin" value="register" /> -->
+                                        <button class="btn btnContact" id='btn_register' type="submit">ĐĂNG KÝ</button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <!--  <input type="submit" class="custom-form custom-submit no-margin" value="clear" /> -->
+                                        <button class="btn btnContact" type="button" id="reset_form">NHẬP LẠI</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- LOGIN-AREA END -->
     </div>
-</div>
+    <script>
+        $(document).ready(function() {
+            $("#btn_login").click(function(event) {
+                event.preventDefault;
+                $("#form_login").submit();
+            });
+            $("#btn_register").click(function(event) {
+                event.preventDefault;
+                $("#form_register").submit();
+            });
+        });
+
+    </script>
 @endsection

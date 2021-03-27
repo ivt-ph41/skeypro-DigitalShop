@@ -59,12 +59,14 @@ class RegisterController extends Controller
             'email.required' => 'Email không được để trống',
             'email.email' => 'Không đúng định dạng email',
             'email.unique' => 'Địa chỉ email này đã được sử dụng',
+            'terms_agreement.required' => 'Xin lỗi yêu cầu đăng kí không thể thực hiện vì bạn chưa đồng ý với Điều Khoản của chúng tôi',
         ];
         return Validator::make($data, [
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'username' => ['required','string','max:255','unique:users','regex:/(^([a-zA-Z]+)(\d+)?$)/u'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'email' => ['required','email','unique:users'],
+            'terms_agreement' => ['required','in:1'],
         ],$messages);
     }
 

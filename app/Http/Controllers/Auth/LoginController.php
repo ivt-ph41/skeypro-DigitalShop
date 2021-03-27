@@ -41,17 +41,17 @@ class LoginController extends Controller
     public function login(Request $request)
     {
        $request->validate([
-           'username' => 'required|string|max:255|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
-           'password' => 'required|string|min:8',
+           'login_username' => 'required|string|max:255|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
+           'login_password' => 'required|string|min:8',
        ],
        [
         'required' => 'Vui lòng nhập đầy đủ thông tin đăng nhập',
-        'username.regex' => 'Tên đăng nhập hoặc mật khẩu sai',
-        'password.string' => 'Tên đăng nhập hoặc mật khẩu sai',
-        'password.min' => 'Tên đăng nhập hoặc mật khẩu sai',
+        'login_username.regex' => 'Tên đăng nhập hoặc mật khẩu sai',
+        'login_password.string' => 'Tên đăng nhập hoặc mật khẩu sai',
+        'login_password.min' => 'Tên đăng nhập hoặc mật khẩu sai',
        ]);
-        $username = trim($request->get('username'));
-        $password = trim($request->get('password'));
+        $username = trim($request->get('login_username'));
+        $password = trim($request->get('login_password'));
        if(Auth::attempt(['username' => $username, 'password' => $password])){
            session()->flash('message','Đăng nhập thành công, chào mừng quay lại');
         return redirect('trang-chu');   
