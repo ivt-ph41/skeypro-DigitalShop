@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="page-content section">
         <!-- Start breadcume area -->
         <div class="breadcume-area">
@@ -29,8 +30,8 @@
                                 <h3>ĐĂNG NHẬP</h3>
                                 <div class="registered">
                                     <p>Nếu bạn đã có tài khoản, vui lòng đăng nhập.</p>
-                                    @if ($errors->has('login_password'))
-                                        <p style='color:red'>{{ $errors->first('login_password') }}</p>
+                                    @if ($errors->has('login_password') || $errors->has('login_attemp'))
+                                        <p style='color:red'>{{ $errors->first('login_password').$errors->first('login_attemp') }}</p>
                                     @endif
                                     <div class="row">
                                         <div class="col-lg-12">

@@ -56,7 +56,7 @@ class LoginController extends Controller
            session()->flash('message','Đăng nhập thành công, chào mừng quay lại');
         return redirect('trang-chu');   
        }else{
-        return redirect()->back()->withErrors('Tên đăng nhập hoặc mật khẩu sai');   
+        return redirect()->back()->withErrors(['login_attemp'=>'Tên đăng nhập hoặc mật khẩu sai']);   
        }
     }
 }

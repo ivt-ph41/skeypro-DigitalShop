@@ -1,12 +1,14 @@
-@if($category_child->getChilds() != null)
 <ul>
-    @foreach ($category_child->getChilds() as $category_child)
-        <li>
-            <a href="">
-                {{ $category_child->name }}
-                @include('layouts.menu_dequy')
-            </a>
-        </li>
-    @endforeach
+    @if ($category->getChilds() != null)
+
+        @foreach ($category->getChilds() as $category)
+            <li>
+                <span>
+                    <a href="" style='background:none; color:black'>
+                        {{ $category->name }}
+                    </a>
+                </span>
+            </li>
+        @endforeach
+    @endif
 </ul>
-@endif

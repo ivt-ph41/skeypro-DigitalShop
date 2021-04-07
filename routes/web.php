@@ -15,7 +15,7 @@
         return redirect('trang-chu');
     });
     Route::get('trang-chu', 'HomeController@index')->name('trang-chu');
-    Route::get('san-pham/{id}', 'HomeController@product_detail')->name('product_detail');
+    Route::get('san-pham/{id}', 'HomeController@product_detail')->name('ui.product.detail');
     Route::post('san-pham/{id}/order', 'MemberController@product_order')->name('product_order');
 // End - Route không bắt buộc đăng nhập
 
